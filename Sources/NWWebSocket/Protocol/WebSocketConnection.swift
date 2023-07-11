@@ -3,6 +3,9 @@ import Network
 
 /// Defines a WebSocket connection.
 public protocol WebSocketConnection {
+    /// Connection state
+    var state: NWConnection.State { get }
+    
     /// Connect to the WebSocket.
     func connect()
 

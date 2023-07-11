@@ -19,6 +19,11 @@ open class NWWebSocket: WebSocketConnection {
 
         return options
     }
+    
+    /// Connection state
+    public var state: NWConnection.State {
+        connection?.state ?? .setup
+    }
 
     // MARK: - Private properties
 
