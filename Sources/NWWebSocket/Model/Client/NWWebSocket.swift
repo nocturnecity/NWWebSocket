@@ -253,9 +253,15 @@ open class NWWebSocket: WebSocketConnection {
             switch state {
             case .ready:
                 self.connection = nil
-                migratedConnection.stateUpdateHandler = self.stateDidChange(to:)
-                migratedConnection.betterPathUpdateHandler = self.betterPath(isAvailable:)
-                migratedConnection.viabilityUpdateHandler = self.viabilityDidChange(isViable:)
+                migratedConnection.stateUpdateHandler = { [weak self] state in
+                    self?.stateDidChange(to: state)
+                }
+                migratedConnection.betterPathUpdateHandler = { [weak self] isAvailable in
+                    self?.betterPath(isAvailable: isAvailable)
+                }
+                migratedConnection.viabilityUpdateHandler = { [weak self] isViable in
+                    self?.viabilityDidChange(isViable: isViable)
+                }
                 self.connection = migratedConnection
                 self.listen()
                 completionHandler(.success(self))
