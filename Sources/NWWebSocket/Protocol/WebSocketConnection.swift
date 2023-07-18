@@ -59,6 +59,12 @@ public protocol WebSocketConnectionDelegate: AnyObject {
     ///   - isViable: A `Bool` indicating if the connection is viable or not.
     func webSocketViabilityDidChange(connection: WebSocketConnection,
                                      isViable: Bool)
+    
+    /// Tells the delegate that the WebSocket connection state has changed.
+    /// - Parameters:
+    ///   - connection: The `WebSocketConnection` whose state has changed.
+    ///   - state: A `NWConnection.State` indicating the state of the connection.
+    func webSocketStateDidChange(connection: WebSocketConnection, state: NWConnection.State)
 
     /// Tells the delegate that the WebSocket has attempted a migration based on a better network path becoming available.
     ///

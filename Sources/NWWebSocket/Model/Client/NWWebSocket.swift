@@ -206,6 +206,7 @@ open class NWWebSocket: WebSocketConnection {
     /// The handler for managing changes to the `connection.state` via the `stateUpdateHandler` on a `NWConnection`.
     /// - Parameter state: The new `NWConnection.State`
     private func stateDidChange(to state: NWConnection.State) {
+        delegate?.webSocketStateDidChange(connection: self, state: state)
         switch state {
         case .ready:
             delegate?.webSocketDidConnect(connection: self)
