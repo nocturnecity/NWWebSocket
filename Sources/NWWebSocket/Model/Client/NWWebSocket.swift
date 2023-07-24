@@ -251,6 +251,7 @@ open class NWWebSocket: WebSocketConnection {
     private func migrateConnection(completionHandler: @escaping (Result<WebSocketConnection, NWError>) -> Void) {
 
         let migratedConnection = NWConnection(to: endpoint, using: parameters)
+        connection = nil
         migratedConnection.stateUpdateHandler = { [weak self] state in
             guard let self = self else {
                 return
@@ -258,7 +259,6 @@ open class NWWebSocket: WebSocketConnection {
 
             switch state {
             case .ready:
-                self.connection = nil
                 migratedConnection.stateUpdateHandler = { [weak self] state in
                     self?.stateDidChange(to: state)
                 }
